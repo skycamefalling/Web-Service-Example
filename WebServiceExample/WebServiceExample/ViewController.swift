@@ -26,10 +26,14 @@ class ViewController: UIViewController {
                         print(json)
 //                        let forecast = json["list"][0]["temp"]["max"]
 //                        print(forecast)
+                        
+                        if let forecast = json["list"][0]["weather"][0]["description"].string {
+                            self.forecastLabel.text = forecast
+                        }
 
-                        if let forecast = json["list"][0]["temp"]["max"].float {
-                            print(forecast)
-                            switch forecast {
+                        if let temp = json["list"][0]["temp"]["max"].float {
+                            print(temp)
+                            switch temp {
                             case 1..<20:
                                 self.view.backgroundColor = UIColor.blue
                             case 21..<30:
@@ -39,7 +43,6 @@ class ViewController: UIViewController {
                             default:
                                 self.view.backgroundColor = UIColor.gray
                             }
-                            self.forecastLabel.text = String(forecast)
                         }
                         
 //                        if let listOfDays = (responseObject as AnyObject)["list"] as? [AnyObject] {
