@@ -15,6 +15,12 @@ class ViewController: UIViewController {
 
         let manager = AFHTTPSessionManager()
         
+        self.forecastLabel.text = ""
+        
+        let activityIndicatorView = UIActivityIndicatorView(activityIndicatorStyle: .gray)
+        view.addSubview(activityIndicatorView)
+        activityIndicatorView.center = view.center
+        activityIndicatorView.startAnimating()
 
         
         manager.get("http://api.openweathermap.org/data/2.5/forecast/daily?q=London&mode=json&units=metric&cnt=1&appid=6412692c30fa26199bdd5b9ba5e1cff1",
@@ -43,6 +49,8 @@ class ViewController: UIViewController {
                             default:
                                 self.view.backgroundColor = UIColor.gray
                             }
+                            activityIndicatorView.removeFromSuperview()
+
                         }
                         
 //                        if let listOfDays = (responseObject as AnyObject)["list"] as? [AnyObject] {
